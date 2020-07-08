@@ -125,7 +125,9 @@
 
     <asset:javascript src="global/rundeckui.js"/>
     <script type="text/javascript">
-      window._rundeck = Object.assign(window._rundeck || {}, {
+        var isOpera = Object.prototype.toString.call(window.opera) == '[object Opera]';
+
+        window._rundeck = Object.assign(window._rundeck || {}, {
         rdBase: '${g.createLink(uri:"/",absolute:true)}',
         context: '${grailsApplication.config.server.contextPath}',
         apiVersion: '${com.dtolabs.rundeck.app.api.ApiVersions.API_CURRENT_VERSION}',
@@ -137,6 +139,10 @@
         hideVersionUpdateNotification: '${session.filterPref?.hideVersionUpdateNotification}',
         feature: {
             legacyExecOutputViewer: {enabled: ${feature.isEnabled(name:'legacyExecOutputViewer')}},
+        },
+        Browser: {
+            IE: !!window.attachEvent && !isOpera,
+            Opera:  isOpera
         }
       })
     </script>
