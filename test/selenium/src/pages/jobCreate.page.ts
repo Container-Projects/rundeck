@@ -21,7 +21,14 @@ export const Elems= {
     option0EditForm: By.css('#optvis_0 > div.optEditForm'),
     option0NameInput: By.css('#optvis_0 > div.optEditForm input[type=text][name=name]'),
     optionFormSaveButton: By.css('#optvis_0 > div.optEditForm  div.floatr > span.btn.btn-primary.btn-sm'),
-    option0li: By.css('#optli_0')
+    option0li: By.css('#optli_0'),
+    notificationsTab: By.css("#job_edit_tabs > li > a[href=\'#tab_notifications\']"),
+    enableNotifications: By.css('#notifiedTrue'),
+    notifyOnsuccessEmail: By.css('#notifyOnsuccessEmail'),
+    notifySuccessRecipients: By.css('#notifySuccessRecipients')
+
+
+
  }
  
 
@@ -96,8 +103,25 @@ export class JobCreatePage extends Page {
     async waitOption0li(){
         return this.ctx.driver.wait(until.elementLocated(Elems.option0li),15000)
     }
+
+    async enableNotificationInput(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.enableNotifications),15000)
+    }
+
+    async notifyOnsuccessEmail(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.notifyOnsuccessEmail),15000)
+    }
+
+    async notifySuccessRecipients(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.notifySuccessRecipients),15000)
+    }
+
+    async notificationsTab(){
+        return await this.ctx.driver.findElement(Elems.notificationsTab)
+    }
     
     formValidationAlert():WebElementPromise{
         return this.ctx.driver.findElement(Elems.formValidationAlert)
     }
+
 }
