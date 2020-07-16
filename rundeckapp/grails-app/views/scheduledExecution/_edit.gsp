@@ -374,7 +374,9 @@
 
     </div>
   </div>
-  <div class="form-group">
+  <div style="${wdgt.styleVisible(if: scheduledExecution?.doNodedispatch)}" class="subfields nodeFilterFields ">
+
+      <div class="form-group">
         <div class="${labelColSize} control-label text-form-label">
             <g:message code="scheduledExecution.property.excludeFilterUncheck.label"/>
         </div>
@@ -405,6 +407,7 @@
             </span>
         </div>
     </div>
+  </div>
 
 
   <div style="${wdgt.styleVisible(if: scheduledExecution?.doNodedispatch)}" class="subfields nodeFilterFields ">

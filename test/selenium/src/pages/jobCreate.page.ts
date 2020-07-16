@@ -25,9 +25,14 @@ export const Elems= {
     notificationsTab: By.css("#job_edit_tabs > li > a[href=\'#tab_notifications\']"),
     enableNotifications: By.css('#notifiedTrue'),
     notifyOnsuccessEmail: By.css('#notifyOnsuccessEmail'),
-    notifySuccessRecipients: By.css('#notifySuccessRecipients')
-
-
+    notifySuccessRecipients: By.css('#notifySuccessRecipients'),
+    tabNodes  : By.css('#job_edit_tabs > li > a[href=\'#tab_nodes\']'),
+    doNodedispatchTrue  : By.xpath('//*[@id="doNodedispatchTrue"]'),
+    nodeFilter  : By.xpath('//*[@id="schedJobNodeFilter"]'),
+    nodeFilterButton  : By.xpath('//*[@id="nodegroupitem"]/div[3]/div/div/span/div[1]/button'),
+    nodeFilterSelectAllLink  : By.xpath('//*[@id="nodegroupitem"]/div[3]/div/div/span/div[1]/ul/li[1]/a'),
+    matchedNodesText  : By.xpath('//*[@id="nodegroupitem"]/div[6]/div/div[1]/div/div/div[1]/div[1]/span[1]/span')
+    
 
  }
  
@@ -119,7 +124,29 @@ export class JobCreatePage extends Page {
     async notificationsTab(){
         return await this.ctx.driver.findElement(Elems.notificationsTab)
     }
-    
+    async tabNodes(){
+        return await this.ctx.driver.findElement(Elems.tabNodes)
+    }
+    async dispatchNodes(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.doNodedispatchTrue),15000)
+    }
+    async nodeFilter(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.nodeFilter),15000)
+    }
+    async nodeFilterButton(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.nodeFilterButton),15000)
+    }
+    async nodeFilterSelectAllLink(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.nodeFilterSelectAllLink),15000)
+    }
+    async matchedNodes(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.matchedNodesText),15000)
+    }
+    async matchedNodesText(){
+        let matchedNodeElem = await this.matchedNodes()
+        return await matchedNodeElem.getText()
+
+    }
     formValidationAlert():WebElementPromise{
         return this.ctx.driver.findElement(Elems.formValidationAlert)
     }
