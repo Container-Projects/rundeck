@@ -21,7 +21,15 @@ export const Elems= {
     option0EditForm: By.css('#optvis_0 > div.optEditForm'),
     option0NameInput: By.css('#optvis_0 > div.optEditForm input[type=text][name=name]'),
     optionFormSaveButton: By.css('#optvis_0 > div.optEditForm  div.floatr > span.btn.btn-primary.btn-sm'),
+    option0UsageSession: By.css('#optvis_0 > div.optEditForm > div > section.section-separator-solo'),
+    option0Type: By.xpath('//*[starts-with(@id,"sectrue")]'),
+    option0KeySelector: By.xpath('//*[starts-with(@id,"defaultStoragePath")]'),
+    option0OpenKeyStorage: By.xpath('//*[starts-with(@id,"optedit")]/div[7]/div/div/span[2]/a'),
     option0li: By.css('#optli_0'),
+
+    storagebrowse: By.xpath('//*[starts-with(@id,"storagebrowse")]'),
+    storagebrowseClose: By.xpath('//*[@id="storagebrowse"]/div/div/div[3]/button[1]'),
+
     notificationsTab: By.css("#job_edit_tabs > li > a[href=\'#tab_notifications\']"),
     enableNotifications: By.css('#notifiedTrue'),
     notifyOnsuccessEmail: By.css('#notifyOnsuccessEmail'),
@@ -31,7 +39,12 @@ export const Elems= {
     nodeFilter  : By.xpath('//*[@id="schedJobNodeFilter"]'),
     nodeFilterButton  : By.xpath('//*[@id="nodegroupitem"]/div[3]/div/div/span/div[1]/button'),
     nodeFilterSelectAllLink  : By.xpath('//*[@id="nodegroupitem"]/div[3]/div/div/span/div[1]/ul/li[1]/a'),
-    matchedNodesText  : By.xpath('//*[@id="nodegroupitem"]/div[6]/div/div[1]/div/div/div[1]/div[1]/span[1]/span')
+    matchedNodesText  : By.xpath('//*[@id="nodegroupitem"]/div[6]/div/div[1]/div/div/div[1]/div[1]/span[1]/span'),
+    workflowStrategy  : By.xpath('//*[@id="workflow.strategy"]'),
+    strategyPluginparallel: By.xpath('//*[@id="strategyPluginparallel"]'),
+    strategyPluginparallelMsg: By.xpath('//*[@id="strategyPluginparallel"]/span/span'),
+    strategyPluginsequential: By.xpath('//*[@id="strategyPluginsequential"]'),
+    strategyPluginsequentialMsg: By.xpath('//*[@id="strategyPluginsequential"]/span/span')    
     
 
  }
@@ -145,8 +158,58 @@ export class JobCreatePage extends Page {
     async matchedNodesText(){
         let matchedNodeElem = await this.matchedNodes()
         return await matchedNodeElem.getText()
-
     }
+    async workflowStrategy(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.workflowStrategy),15000)
+    }
+    async strategyPluginparallel(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.strategyPluginparallel),15000)
+    }
+
+    async strategyPluginparallelMsg(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.strategyPluginparallelMsg),15000)
+    }
+    async strategyPluginparallelText(){
+        let matchedNodeElem = await this.strategyPluginparallelMsg()
+        return await matchedNodeElem.getText()
+    }
+
+    async strategyPluginsequential(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.strategyPluginsequential),25000)
+    }
+
+    async strategyPluginsequentialMsg(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.strategyPluginsequentialMsg),25000)
+    }
+    async strategyPluginsequentialText(){
+        let matchedNodeElem = await this.strategyPluginsequentialMsg()
+        return await matchedNodeElem.getText()
+    }
+
+    async option0UsageSession(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.option0UsageSession),25000)
+    }
+
+    async option0Type(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.option0Type),25000)
+    }
+
+    async option0KeySelector(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.option0KeySelector),25000)
+    }
+
+    async option0OpenKeyStorage(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.option0OpenKeyStorage),25000)
+    }
+
+    async storagebrowse(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.storagebrowse),25000)
+    }
+
+    async storagebrowseClose(){
+        return this.ctx.driver.wait(until.elementLocated(Elems.storagebrowseClose),25000)
+    }
+
     formValidationAlert():WebElementPromise{
         return this.ctx.driver.findElement(Elems.formValidationAlert)
     }
