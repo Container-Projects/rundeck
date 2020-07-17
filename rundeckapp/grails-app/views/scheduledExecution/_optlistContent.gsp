@@ -30,8 +30,7 @@
     <g:javascript>
     fireWhenReady('optli_${options.size()-1}',function(){
         jQuery('li.optEntry.dohighlight').each(function(index, elem){
-            console.log(elem);
-            jQuery(elem).highlight();
+            jQuery(elem).effect( "highlight" );
         });
     });
     </g:javascript>

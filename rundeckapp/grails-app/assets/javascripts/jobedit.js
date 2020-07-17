@@ -1265,7 +1265,7 @@ function _optsave(formelem, tokendataid, target) {
       jQuery(target).html(data);
       if (jQuery(target).find('div.optEditForm').length < 1) {
         _showOptControls();
-        jQuery(target).highlight();
+        jQuery(target).effect( "highlight" );
       } else {
         _configureInputRestrictions(target);
         _hideOptControls();
@@ -1372,8 +1372,7 @@ function _optsavenew(formelem, tokendataid) {
         _hideOptControls();
 
       } else {
-
-        jQuery(newoptli).highlight();
+        jQuery(newoptli).effect( "highlight" );
         newoptli = null;
         _showOptControls();
         _reloadOpts();

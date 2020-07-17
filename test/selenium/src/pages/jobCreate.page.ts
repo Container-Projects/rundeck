@@ -13,6 +13,7 @@ export const Elems= {
     formValidationAlert: By.css('#page_job_edit > div.list-group-item > div.alert.alert-danger'),
 
     tabWorkflow  : By.css('#job_edit_tabs > li > a[href=\'#tab_workflow\']'),
+    addNewWfStepButton: By.xpath('//*[@id="wfnewbutton"]/span'),
     addNewWfStepCommand: By.css('#wfnewtypes #addnodestep > div > a.add_node_step_type[data-node-step-type=command]'),
     wfStepCommandRemoteText: By.css('#adhocRemoteStringField'),
     wfStep0SaveButton: By.css('#wfli_0 div.wfitemEditForm div._wfiedit > div.floatr > span.btn.btn-primary.btn-sm'),
@@ -26,7 +27,7 @@ export const Elems= {
     option0KeySelector: By.xpath('//*[starts-with(@id,"defaultStoragePath")]'),
     option0OpenKeyStorage: By.xpath('//*[starts-with(@id,"optedit")]/div[7]/div/div/span[2]/a'),
     option0li: By.css('#optli_0'),
-
+    
     storagebrowse: By.xpath('//*[starts-with(@id,"storagebrowse")]'),
     storagebrowseClose: By.xpath('//*[@id="storagebrowse"]/div/div/div[3]/button[1]'),
 
@@ -44,8 +45,17 @@ export const Elems= {
     strategyPluginparallel: By.xpath('//*[@id="strategyPluginparallel"]'),
     strategyPluginparallelMsg: By.xpath('//*[@id="strategyPluginparallel"]/span/span'),
     strategyPluginsequential: By.xpath('//*[@id="strategyPluginsequential"]'),
-    strategyPluginsequentialMsg: By.xpath('//*[@id="strategyPluginsequential"]/span/span')    
-    
+    strategyPluginsequentialMsg: By.xpath('//*[@id="strategyPluginsequential"]/span/span'),   
+
+    optionUndoButton: By.xpath('//*[@id="optundoredo"]/div/span[1]'),
+    optionRedoButton: By.xpath('//*[@id="optundoredo"]/div/span[2]'),
+    revertOptionsButton: By.xpath('//*[@id="optundoredo"]/div/span[3]'),
+    revertOptionsConfirm: By.xpath('//*[starts-with(@id,"popover")]/div[2]/span[2]'),
+
+    wfUndoButton: By.xpath('//*[@id="wfundoredo"]/div/span[1]'),
+    wfRedoButton: By.xpath('//*[@id="wfundoredo"]/div/span[2]'),
+    revertWfButton: By.xpath('//*[@id="wfundoredo"]/div/span[3]'),
+    revertWfConfirm: By.xpath('//*[starts-with(@id,"popover")]/div[2]/span[2]')
 
  }
  
@@ -210,6 +220,98 @@ export class JobCreatePage extends Page {
         return this.ctx.driver.wait(until.elementLocated(Elems.storagebrowseClose),25000)
     }
 
+    async optionNameInput(position: string){
+        let  optionNameInput = By.css('#optvis_'+position+' > div.optEditForm input[type=text][name=name]')
+        return await this.ctx.driver.findElement(optionNameInput)
+    }
+
+    async optionFormSave(position: string){
+        let  optionEditForm = By.css('#optvis_'+position+' > div.optEditForm  div.floatr > span.btn.btn-primary.btn-sm')
+        return await this.ctx.driver.findElement(optionEditForm)
+    }
+
+    async waitoptionEditForm(position: string){
+        let  optionEditForm = By.css('#optvis_'+position+' > div.optEditForm')
+        return this.ctx.driver.wait(until.elementLocated(optionEditForm),15000)
+    }
+
+    async isOptionli(position: string){
+        let  optionEditForm = By.css('#optli_'+position)
+
+        try {
+            await this.ctx.driver.findElement(optionEditForm);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+  
+    async waitOptionli(position: string){
+        let  optionEditForm = By.css('#optli_'+position)
+
+        return this.ctx.driver.wait(until.elementLocated(optionEditForm),15000)
+    }
+
+    async optionUndoButton(){
+        return await this.ctx.driver.findElement(Elems.optionUndoButton)
+    }
+
+    async optionRedoButton(){
+        return await this.ctx.driver.findElement(Elems.optionRedoButton)
+    }
+
+    async waitUndoRedo(wait: any){
+        return await this.ctx.driver.sleep(wait)
+    }
+
+    async revertOptionsButton(){
+        return await this.ctx.driver.findElement(Elems.revertOptionsButton)
+    }
+
+    async revertOptionsConfirm(){
+        return await this.ctx.driver.findElement(Elems.revertOptionsConfirm)
+    }
+
+    async wfStepSaveButton(position: string){
+        let wfStep0SaveButton = By.css('#wfli_'+position+' div.wfitemEditForm div._wfiedit > div.floatr > span.btn.btn-primary.btn-sm')
+        return await this.ctx.driver.findElement(wfStep0SaveButton)
+    }
+    async waitWfstepvis(position: string){
+        let wfstep0vis = By.css('#wfivis_'+position)
+        await this.ctx.driver.wait(until.elementLocated(wfstep0vis), 15000)
+    }
+
+    async wfUndoButton(){
+        return await this.ctx.driver.findElement(Elems.wfUndoButton)
+    }
+
+    async wfRedoButton(){
+        return await this.ctx.driver.findElement(Elems.wfRedoButton)
+    }
+
+    async revertWfButton(){
+        return await this.ctx.driver.findElement(Elems.revertWfButton)
+    }
+
+    async revertWfConfirm(){
+        return await this.ctx.driver.findElement(Elems.revertWfConfirm)
+    }
+
+    async isWfli(position: string){
+        let  optionEditForm = By.css('#wfivis_'+position)
+
+        try {
+            await this.ctx.driver.findElement(optionEditForm);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    async addNewWfStepButton(){
+        return await this.ctx.driver.findElement(Elems.addNewWfStepButton)
+    }
+    
     formValidationAlert():WebElementPromise{
         return this.ctx.driver.findElement(Elems.formValidationAlert)
     }
