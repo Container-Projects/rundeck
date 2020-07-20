@@ -22,7 +22,7 @@ beforeAll(async () => {
 })
 
 describe('job', () => {
-    
+
     it('job workflow simple undo', async () => {
         await jobCreatePage.get()
         await ctx.driver.wait(until.urlContains('/job/create'), 25000)
@@ -70,13 +70,12 @@ describe('job', () => {
         //click step Save button and wait for the step content to display
         await wfStep1SaveButton.click()
         await jobCreatePage.waitWfstepvis('1')
-
-
+        
         let wfUndo = await jobCreatePage.wfUndoButton()
         expect(wfUndo).toBeDefined()
 
-        wfUndo.click()
-        await jobCreatePage.waitUndoRedo(10000)
+        await wfUndo.click()
+        await jobCreatePage.waitUndoRedo(5000)
 
         let isWfli1=await jobCreatePage.isWfli("1")
         expect(isWfli1).toEqual(false)
@@ -125,7 +124,7 @@ describe('job', () => {
         let addNewWfStepButton = await jobCreatePage.addNewWfStepButton()
         expect(addNewWfStepButton).toBeDefined()
 
-        addNewWfStepButton.click()
+        await addNewWfStepButton.click()
 
         addWfStepCommand=await jobCreatePage.addNewWfStepCommand()
 
@@ -147,14 +146,14 @@ describe('job', () => {
         let wfUndo = await jobCreatePage.wfUndoButton()
         expect(wfUndo).toBeDefined()
 
-        wfUndo.click()
-        await jobCreatePage.waitUndoRedo(10000)
+        await wfUndo.click()
+        await jobCreatePage.waitUndoRedo(5000)
 
         let wfRedo = await jobCreatePage.wfRedoButton()
         expect(wfRedo).toBeDefined()
 
-        wfRedo.click()
-        await jobCreatePage.waitUndoRedo(10000)
+        await wfRedo.click()
+        await jobCreatePage.waitUndoRedo(5000)
 
         let isWfli1=await jobCreatePage.isWfli("1")
         expect(isWfli1).toEqual(true)
@@ -203,7 +202,7 @@ describe('job', () => {
         let addNewWfStepButton = await jobCreatePage.addNewWfStepButton()
         expect(addNewWfStepButton).toBeDefined()
 
-        addNewWfStepButton.click()
+        await addNewWfStepButton.click()
 
         addWfStepCommand=await jobCreatePage.addNewWfStepCommand()
 
@@ -225,14 +224,14 @@ describe('job', () => {
         let revertWfButton = await jobCreatePage.revertWfButton()
         expect(revertWfButton).toBeDefined()
 
-        revertWfButton.click()
-        await jobCreatePage.waitUndoRedo(10000)
+        await revertWfButton.click()
+        await jobCreatePage.waitUndoRedo(5000)
 
         let revertWfConfirm = await jobCreatePage.revertWfConfirm()
         expect(revertWfConfirm).toBeDefined()
 
-        revertWfConfirm.click()
-        await jobCreatePage.waitUndoRedo(10000)
+        await revertWfConfirm.click()
+        await jobCreatePage.waitUndoRedo(5000)
 
         let isWfli0=await jobCreatePage.isWfli("0")
         expect(isWfli0).toEqual(false)
@@ -244,7 +243,7 @@ describe('job', () => {
         addNewWfStepButton = await jobCreatePage.addNewWfStepButton()
         expect(addNewWfStepButton).toBeDefined()
 
-        addNewWfStepButton.click()
+        await addNewWfStepButton.click()
 
         addWfStepCommand=await jobCreatePage.addNewWfStepCommand()
 
@@ -276,5 +275,5 @@ describe('job', () => {
 
     })
 
-    
+
 })

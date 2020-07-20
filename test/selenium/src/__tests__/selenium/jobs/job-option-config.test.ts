@@ -118,19 +118,19 @@ describe('job', () => {
         await optionNameInput.sendKeys(optionName)
 
         let option0Type=await jobCreatePage.option0Type()
-        option0Type.click()
+        await option0Type.click()
 
         let option0KeySelector=await jobCreatePage.option0KeySelector()
         expect(option0KeySelector).toBeDefined()
 
         let option0OpenKeyStorage=await jobCreatePage.option0OpenKeyStorage()
-        option0OpenKeyStorage.click()
+        await option0OpenKeyStorage.click()
 
         let storagebrowse=await jobCreatePage.storagebrowse()
         expect(storagebrowse).toBeDefined()
 
         let storagebrowseClose = await jobCreatePage.storagebrowseClose()
-        storagebrowseClose.click()
+        await storagebrowseClose.click()
 
     
         //save option

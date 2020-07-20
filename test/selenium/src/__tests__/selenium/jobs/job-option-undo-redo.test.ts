@@ -179,13 +179,13 @@ describe('job', () => {
         let revertOptionButton= await jobCreatePage.revertOptionsButton()
         expect(revertOptionButton).toBeDefined()
 
-        revertOptionButton.click();
+        await revertOptionButton.click();
         await jobCreatePage.waitUndoRedo(5000);
 
         let revertOptionsConfirm= await jobCreatePage.revertOptionsConfirm()
         expect(revertOptionsConfirm).toBeDefined()
 
-        revertOptionsConfirm.click()
+        await revertOptionsConfirm.click()
 
         await jobCreatePage.waitUndoRedo(5000);
 
@@ -273,13 +273,13 @@ describe('job', () => {
         let optionUndo = await jobCreatePage.optionUndoButton()
         expect(optionUndo).toBeDefined()
 
-        optionUndo.click()
+        await optionUndo.click()
         await jobCreatePage.waitUndoRedo(5000);
 
         let optionRedo = await jobCreatePage.optionRedoButton()
         expect(optionRedo).toBeDefined()
 
-        optionRedo.click()
+        await optionRedo.click()
         await jobCreatePage.waitUndoRedo(5000);
 
         let isOptionli0=await jobCreatePage.isOptionli("0")
