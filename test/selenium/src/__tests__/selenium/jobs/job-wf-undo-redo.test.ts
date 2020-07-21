@@ -50,6 +50,8 @@ describe('job', () => {
         await jobCreatePage.waitWfstepvis('0')
 
         // add step 2
+        await jobCreatePage.waitAddNewWfStepButton()
+
         let addNewWfStepButton = await jobCreatePage.addNewWfStepButton()
         expect(addNewWfStepButton).toBeDefined()
 
@@ -71,6 +73,8 @@ describe('job', () => {
         await wfStep1SaveButton.click()
         await jobCreatePage.waitWfstepvis('1')
         
+        await jobCreatePage.waitWfUndoButton()
+
         let wfUndo = await jobCreatePage.wfUndoButton()
         expect(wfUndo).toBeDefined()
 
@@ -84,13 +88,7 @@ describe('job', () => {
         let save = await jobCreatePage.saveButton()
         await save.click()
 
-        await ctx.driver.wait(until.urlContains('/job/show'), 15000)
-        let jobShowPage = new JobShowPage(ctx,'SeleniumBasic','')
-
-        //verify job name
-
-        let jobTitleText = await jobShowPage.jobTitleText()
-        expect(jobTitleText).toContain(jobNameText)
+        await ctx.driver.wait(until.urlContains('/job/show'), 25000)
 
     })
 
@@ -121,6 +119,8 @@ describe('job', () => {
         await jobCreatePage.waitWfstepvis('0')
 
         // add step 2
+        await jobCreatePage.waitAddNewWfStepButton()
+
         let addNewWfStepButton = await jobCreatePage.addNewWfStepButton()
         expect(addNewWfStepButton).toBeDefined()
 
@@ -142,13 +142,15 @@ describe('job', () => {
         await wfStep1SaveButton.click()
         await jobCreatePage.waitWfstepvis('1')
 
+        await jobCreatePage.waitWfUndoButton()
 
         let wfUndo = await jobCreatePage.wfUndoButton()
         expect(wfUndo).toBeDefined()
-
+ 
         await wfUndo.click()
         await jobCreatePage.waitUndoRedo(5000)
 
+        await jobCreatePage.waitWfRedoButton()
         let wfRedo = await jobCreatePage.wfRedoButton()
         expect(wfRedo).toBeDefined()
 
@@ -162,13 +164,7 @@ describe('job', () => {
         let save = await jobCreatePage.saveButton()
         await save.click()
 
-        await ctx.driver.wait(until.urlContains('/job/show'), 15000)
-        let jobShowPage = new JobShowPage(ctx,'SeleniumBasic','')
-
-        //verify job name
-
-        let jobTitleText = await jobShowPage.jobTitleText()
-        expect(jobTitleText).toContain(jobNameText)
+        await ctx.driver.wait(until.urlContains('/job/show'), 25000)
 
     })
 
@@ -199,6 +195,8 @@ describe('job', () => {
         await jobCreatePage.waitWfstepvis('0')
 
         // add step 2
+        await jobCreatePage.waitAddNewWfStepButton()
+
         let addNewWfStepButton = await jobCreatePage.addNewWfStepButton()
         expect(addNewWfStepButton).toBeDefined()
 
@@ -210,7 +208,6 @@ describe('job', () => {
         await addWfStepCommand.click()
         await jobCreatePage.waitWfStepCommandRemoteText()
 
-
         wfStepCommandRemoteText=await jobCreatePage.wfStepCommandRemoteText()
         await wfStepCommandRemoteText.sendKeys('echo selenium test 2')
 
@@ -220,6 +217,7 @@ describe('job', () => {
         await wfStep1SaveButton.click()
         await jobCreatePage.waitWfstepvis('1')
 
+        await jobCreatePage.waitRevertWfButton()
 
         let revertWfButton = await jobCreatePage.revertWfButton()
         expect(revertWfButton).toBeDefined()
@@ -240,6 +238,8 @@ describe('job', () => {
 
         //add final step
         // add step 2
+        await jobCreatePage.waitAddNewWfStepButton()
+
         addNewWfStepButton = await jobCreatePage.addNewWfStepButton()
         expect(addNewWfStepButton).toBeDefined()
 
@@ -265,13 +265,7 @@ describe('job', () => {
         let save = await jobCreatePage.saveButton()
         await save.click()
 
-        await ctx.driver.wait(until.urlContains('/job/show'), 15000)
-        let jobShowPage = new JobShowPage(ctx,'SeleniumBasic','')
-
-        //verify job name
-
-        let jobTitleText = await jobShowPage.jobTitleText()
-        expect(jobTitleText).toContain(jobNameText)
+        await ctx.driver.wait(until.urlContains('/job/show'), 25000)
 
     })
 

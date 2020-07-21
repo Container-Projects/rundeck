@@ -73,11 +73,14 @@ describe('job', () => {
         let save = await jobCreatePage.saveButton()
         await save.click()
 
-        await ctx.driver.wait(until.urlContains('/job/show'), 30000)
+        await ctx.driver.wait(until.urlContains('/job/show'), 35000)
         let jobShowPage = new JobShowPage(ctx,'SeleniumBasic','')
+
+        await jobShowPage.waitJobDefinition()
         let jobDefinitionModal = await jobShowPage.jobDefinition()
         await jobDefinitionModal.click()
 
+        await jobShowPage.waitDefinitionNotificationText()
         let notificationDefinitionText = await jobShowPage.jobDefinitionNotificationText()
         expect(notificationDefinitionText).toEqual("mail to: " + newEmail)
     })
@@ -108,11 +111,15 @@ describe('job', () => {
         let save = await jobCreatePage.editSaveButton()
         await save.click()
 
-        await ctx.driver.wait(until.urlContains('/job/show'), 30000)
+        await ctx.driver.wait(until.urlContains('/job/show'), 35000)
         let jobShowPage = new JobShowPage(ctx,'SeleniumBasic','')
+
+        await jobShowPage.waitJobDefinition()
+
         let jobDefinitionModal = await jobShowPage.jobDefinition()
         await jobDefinitionModal.click()
 
+        await jobShowPage.waitDefinitionNotificationText()
         let notificationDefinitionText = await jobShowPage.jobDefinitionNotificationText()
         expect(notificationDefinitionText).toEqual("mail to: " + newEmail)
     })

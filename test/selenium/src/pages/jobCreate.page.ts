@@ -52,8 +52,10 @@ export const Elems= {
     revertOptionsButton: By.xpath('//*[@id="optundoredo"]/div/span[3]'),
     revertOptionsConfirm: By.xpath('//*[starts-with(@id,"popover")]/div[2]/span[2]'),
 
-    wfUndoButton: By.xpath('//*[@id="wfundoredo"]/div/span[1]'),
-    wfRedoButton: By.xpath('//*[@id="wfundoredo"]/div/span[2]'),
+    //wfUndoButton: By.xpath('//*[@id="wfundoredo"]/div/span[1]'),
+    wfUndoButton: By.css('#wfundoredo > div > span.btn.btn-xs.btn-default.act_undo.flash_undo'),    
+    //wfRedoButton: By.xpath('//*[@id="wfundoredo"]/div/span[2]'),
+    wfRedoButton: By.css('#wfundoredo > div > span.btn.btn-xs.btn-default.act_redo.flash_undo'),
     revertWfButton: By.xpath('//*[@id="wfundoredo"]/div/span[3]'),
     revertWfConfirm: By.xpath('//*[starts-with(@id,"popover")]/div[2]/span[2]')
 
@@ -127,6 +129,9 @@ export class JobCreatePage extends Page {
     }
     async optionFormSaveButton(){
         return await this.ctx.driver.findElement(Elems.optionFormSaveButton)
+    }
+    async waitOptionFormSaveButton(){
+        await this.ctx.driver.wait(until.elementLocated(Elems.optionFormSaveButton), 15000)
     }
     async waitOption0li(){
         return this.ctx.driver.wait(until.elementLocated(Elems.option0li),15000)
@@ -289,6 +294,18 @@ export class JobCreatePage extends Page {
         return await this.ctx.driver.findElement(Elems.wfRedoButton)
     }
 
+    async waitWfUndoButton(){
+        await this.ctx.driver.wait(until.elementLocated(Elems.wfUndoButton), 15000)
+    }
+
+    async waitWfRedoButton(){
+        await this.ctx.driver.wait(until.elementLocated(Elems.wfRedoButton), 15000)
+    }
+
+    async waitRevertWfButton(){
+        await this.ctx.driver.wait(until.elementLocated(Elems.revertWfButton), 15000)
+    }
+
     async revertWfButton(){
         return await this.ctx.driver.findElement(Elems.revertWfButton)
     }
@@ -310,6 +327,10 @@ export class JobCreatePage extends Page {
 
     async addNewWfStepButton(){
         return await this.ctx.driver.findElement(Elems.addNewWfStepButton)
+    }
+
+    async waitAddNewWfStepButton(){
+        await this.ctx.driver.wait(until.elementLocated(Elems.addNewWfStepButton), 15000)
     }
     
     formValidationAlert():WebElementPromise{

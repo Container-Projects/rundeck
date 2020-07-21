@@ -1,4 +1,4 @@
-import {By} from 'selenium-webdriver'
+import {By, until} from 'selenium-webdriver'
 
 import {Page} from '@rundeck/testdeck/page'
 import { Context } from '@rundeck/testdeck/context'
@@ -43,6 +43,13 @@ export class JobShowPage extends Page {
   }
   async jobDefinition(){
     return await this.ctx.driver.findElement(Elems.jobDefinition)
+  }
+  async waitJobDefinition(){
+    await this.ctx.driver.wait(until.elementLocated(Elems.jobDefinition), 25000)
+  }
+
+  async waitDefinitionNotificationText(){
+    await this.ctx.driver.wait(until.elementLocated(Elems.notificationDefinition), 25000)
   }
   async jobDefinitionNotificationText(){
     let data= await this.ctx.driver.findElement(Elems.notificationDefinition)
